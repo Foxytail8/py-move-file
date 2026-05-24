@@ -2,7 +2,7 @@
 import os
 
 
-def move_file(command: list) -> None:
+def move_file(command: str) -> None:
     parts = command.split()
     if len(parts) != 3:
         return
@@ -11,6 +11,8 @@ def move_file(command: list) -> None:
         return
     if not os.path.exists(source_file):
         return
+    if destination_path.endswith("/"):
+        destination_path = os.path.join(destination_path, source_file)
     directory = os.path.dirname(destination_path)
     if directory and not os.path.exists(directory):
         os.makedirs(directory)
